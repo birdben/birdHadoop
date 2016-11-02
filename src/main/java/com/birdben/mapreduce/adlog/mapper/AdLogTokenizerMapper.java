@@ -36,6 +36,7 @@ public class AdLogTokenizerMapper extends Mapper<Object, Text, NullWritable, Tex
                     context.write(nullWritable, value);
                 }
             } catch (Exception e) {
+                logger.error(e.getMessage());
                 e.printStackTrace();
             }
         }

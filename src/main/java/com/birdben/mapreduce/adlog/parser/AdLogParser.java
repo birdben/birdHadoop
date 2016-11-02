@@ -49,9 +49,7 @@ public class AdLogParser {
             JSONObject innerJsonObject = (JSONObject) jsonArray.get(i);
             String name = innerJsonObject.get("name").toString();
 
-            //logger.info("convertLogToAd inner_timestamp:" + new Date(inner_timestamp));
-            //logger.info("convertLogToAd rpid:" + rpid);
-            //logger.info("convertLogToAd name:" + name);
+            logger.info("convertLogToAd name:" + name);
 
             if (CLICK_AD.equals(name) || VIEW_AD.equals(name) || OPEN_AD.equals(name)) {
                 String rpid = innerJsonObject.get("rpid").toString();
