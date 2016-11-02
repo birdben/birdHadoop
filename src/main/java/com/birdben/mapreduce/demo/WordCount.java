@@ -27,7 +27,7 @@ public class WordCount {
         System.out.println("birdben out WordCount start");
         logger.info("birdben logger WordCount start");
         
-	// 设置一个用户定义的job名称
+	    // 设置一个用户定义的job名称
         Job job = new Job(conf, "wordcount");
         job.setJarByClass(WordCount.class);
         // 为job设置使用的Mapper类（拆分）

@@ -1,5 +1,7 @@
 package com.birdben.mapreduce.adlog;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
@@ -12,13 +14,19 @@ import com.birdben.mapreduce.adlog.mapper.AdLogTokenizerMapper;
 import com.birdben.mapreduce.adlog.reducer.AdLogReducer;
 
 public class AdLogMain {
+
+    private static Log logger = LogFactory.getLog(AdLogMain.class);
+
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
         if(otherArgs.length != 2) {
-            System.err.println("Usage: wordcount <in> <out>");
+            System.err.println("Usage: adlog <in> <out>");
             System.exit(2);
         }
+
+        System.out.println("birdben out AdLog start");
+        logger.info("birdben logger AdLog start");
 
         Job job = new Job(conf, "adlog");
         job.setJarByClass(AdLogMain.class);
