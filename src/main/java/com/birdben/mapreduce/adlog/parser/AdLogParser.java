@@ -3,6 +3,8 @@ package com.birdben.mapreduce.adlog.parser;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.*;
 
@@ -15,6 +17,8 @@ import java.util.*;
  * @since 1.0
  **/
 public class AdLogParser {
+
+    private static Log logger = LogFactory.getLog(AdLogParser.class);
 
     public static final String CLICK_AD = "rp.hb.ad.click_ad";
     public static final String VIEW_AD = "rp.hb.ad.view_ad";
@@ -35,6 +39,9 @@ public class AdLogParser {
      * @date 16/10/20 16:33
      **/
     public static List<String> convertLogToAd(String log) throws Exception {
+        System.out.println("birdben AdLogParser out start");
+        logger.info("birdben AdLogParser logger start");
+
         List<String> adLogList = new ArrayList<>();
         JSONObject jsonObject = JSON.parseObject(log);
         JSONArray jsonArray = (JSONArray) jsonObject.get("logs");
