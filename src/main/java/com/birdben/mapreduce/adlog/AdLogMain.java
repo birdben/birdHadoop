@@ -20,7 +20,7 @@ public class AdLogMain {
             System.exit(2);
         }
 
-        Job job = new Job(conf, "wordcount");
+        Job job = new Job(conf, "adlog");
         job.setJarByClass(AdLogMain.class);
         job.setMapperClass(AdLogTokenizerMapper.class);
         job.setCombinerClass(AdLogReducer.class);

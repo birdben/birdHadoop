@@ -1,5 +1,8 @@
 package com.birdben.mapreduce.demo;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -10,6 +13,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 public class WordCount {
+
+    private static Log logger = LogFactory.getLog(WordCount.class);
+
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
@@ -18,7 +24,10 @@ public class WordCount {
             System.exit(2);
         }
 
-        // 设置一个用户定义的job名称
+        System.out.println("birdben out WordCount start");
+        logger.info("birdben logger WordCount start");
+        
+	// 设置一个用户定义的job名称
         Job job = new Job(conf, "wordcount");
         job.setJarByClass(WordCount.class);
         // 为job设置使用的Mapper类（拆分）
