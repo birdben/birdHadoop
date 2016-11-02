@@ -20,9 +20,9 @@ public class AdLogParser {
 
     private static Log logger = LogFactory.getLog(AdLogParser.class);
 
-    public static final String CLICK_AD = "rp.hb.ad.click_ad";
-    public static final String VIEW_AD = "rp.hb.ad.view_ad";
-    public static final String OPEN_AD = "rp.hb.ad.open_hb";
+    public static final String CLICK_AD = "birdben.ad.click_ad";
+    public static final String VIEW_AD = "birdben.ad.view_ad";
+    public static final String OPEN_AD = "birdben.ad.open_hb";
 
     public static final String AD_CLICK_LOG_LIST = "adClickLogList";
     public static final String AD_VIEW_LOG_LIST = "adViewLogList";
