@@ -29,8 +29,8 @@ public class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable>
      * 所以只要遍历 values 并求和，即可得到某个单词出现的总次数。
      */
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException,InterruptedException {
-	System.out.println("birdben IntSumReducer out start");
-	logger.info("birdben IntSumReducer logger start");
+	    System.out.println("birdben IntSumReducer out start");
+	    logger.info("birdben IntSumReducer logger start");
         int sum = 0;
         for(IntWritable val:values) {
             sum += val.get();

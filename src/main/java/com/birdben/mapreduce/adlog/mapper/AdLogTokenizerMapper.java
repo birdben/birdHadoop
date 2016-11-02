@@ -19,6 +19,9 @@ public class AdLogTokenizerMapper extends Mapper<Object, Text, NullWritable, Tex
     Text word = new Text();
 
     public void map(Object key, Text value, Context context) throws IOException,InterruptedException {
+        System.out.println("birdben AdLogTokenizerMapper out start");
+        logger.info("birdben AdLogTokenizerMapper logger start");
+
         StringTokenizer itr = new StringTokenizer(value.toString());
 
         while(itr.hasMoreTokens()) {

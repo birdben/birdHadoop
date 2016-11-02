@@ -15,6 +15,9 @@ public class AdLogReducer extends Reducer<NullWritable, Text, NullWritable, Text
     private Log logger = LogFactory.getLog(AdLogReducer.class);
 
     public void reduce(NullWritable key, Iterable<Text> values, Context context) throws IOException,InterruptedException {
+        System.out.println("birdben AdLogReducer out start");
+        logger.info("birdben AdLogReducer logger start");
+
         for(Text val:values) {
             System.out.println("birdben out reduce val:" + val);
             logger.info("birdben log reduce val:" + val);

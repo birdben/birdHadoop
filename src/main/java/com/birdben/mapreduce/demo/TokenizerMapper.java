@@ -31,8 +31,8 @@ public class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
      * 注：StringTokenizer是Java工具包中的一个类，用于将字符串进行拆分——默认情况下使用空格作为分隔符进行分割。
      */
     public void map(Object key, Text value, Context context) throws IOException,InterruptedException {
-	System.out.println("birdben TokenizerMapper out start");
-	logger.info("birdben TokenizerMapper info start");
+	    System.out.println("birdben TokenizerMapper out start");
+	    logger.info("birdben TokenizerMapper info start");
         StringTokenizer itr = new StringTokenizer(value.toString());
         while(itr.hasMoreTokens()) {
             word.set(itr.nextToken());
