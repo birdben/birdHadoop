@@ -51,30 +51,35 @@ public class AdLogParser {
 
             logger.info("convertLogToAd name:" + name);
 
-            if (CLICK_AD.equals(name) || VIEW_AD.equals(name) || OPEN_AD.equals(name)) {
-                String rpid = innerJsonObject.get("rpid").toString();
-                Long inner_timestamp = Long.parseLong(innerJsonObject.get("timestamp").toString());
-                String bid = innerJsonObject.get("bid").toString();
-                String uid = innerJsonObject.get("uid").toString();
-                String did = innerJsonObject.get("did").toString();
-                String duid = innerJsonObject.get("duid").toString();
-                String hb_uid = innerJsonObject.get("hb_uid").toString();
-                String ua = innerJsonObject.get("ua").toString();
-                String device_id = innerJsonObject.get("device_id").toString();
-                String server_timestamp = innerJsonObject.get("server_timestamp").toString();
+            try {
+                if (CLICK_AD.equals(name) || VIEW_AD.equals(name) || OPEN_AD.equals(name)) {
+                    String rpid = innerJsonObject.get("rpid").toString();
+                    Long inner_timestamp = Long.parseLong(innerJsonObject.get("timestamp").toString());
+                    String bid = innerJsonObject.get("bid").toString();
+                    String uid = innerJsonObject.get("uid").toString();
+                    String did = innerJsonObject.get("did").toString();
+                    String duid = innerJsonObject.get("duid").toString();
+                    String hb_uid = innerJsonObject.get("hb_uid").toString();
+                    String ua = innerJsonObject.get("ua").toString();
+                    String device_id = innerJsonObject.get("device_id").toString();
+                    String server_timestamp = innerJsonObject.get("server_timestamp").toString();
 
-                Map<String, Object> map = new HashMap<>();
-                map.put("rpid", rpid);
-                map.put("timestamp", inner_timestamp);
-                map.put("bid", bid);
-                map.put("uid", uid);
-                map.put("did", did);
-                map.put("duid", duid);
-                map.put("hb_uid", hb_uid);
-                map.put("ua", ua);
-                map.put("device_id", device_id);
-                map.put("server_timestamp", server_timestamp);
-                adLogList.add(JSON.toJSONString(map));
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("rpid", rpid);
+                    map.put("timestamp", inner_timestamp);
+                    map.put("bid", bid);
+                    map.put("uid", uid);
+                    map.put("did", did);
+                    map.put("duid", duid);
+                    map.put("hb_uid", hb_uid);
+                    map.put("ua", ua);
+                    map.put("device_id", device_id);
+                    map.put("server_timestamp", server_timestamp);
+                    adLogList.add(JSON.toJSONString(map));
+                }
+            } catch (Exception ex) {
+                logger.error("birdben AdLogParser error:" + ex.getMessage());
+                ex.printStackTrace();
             }
         }
         return adLogList;

@@ -35,9 +35,9 @@ public class AdLogTokenizerMapper extends Mapper<Object, Text, NullWritable, Tex
                     logger.info("birdben log map log:" + log);
                     context.write(nullWritable, value);
                 }
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
+            } catch (Exception ex) {
+                logger.error("birdben AdLogTokenizerMapper error:" + ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }
