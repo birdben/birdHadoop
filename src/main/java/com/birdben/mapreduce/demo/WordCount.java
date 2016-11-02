@@ -18,15 +18,26 @@ public class WordCount {
             System.exit(2);
         }
 
+        // 设置一个用户定义的job名称
         Job job = new Job(conf, "wordcount");
         job.setJarByClass(WordCount.class);
+        // 为job设置使用的Mapper类（拆分）
         job.setMapperClass(TokenizerMapper.class);
+        // 为job设置使用的Combiner类（中间结果合并）
         job.setCombinerClass(IntSumReducer.class);
+        // 为job设置使用的Reducer类（合并）
         job.setReducerClass(IntSumReducer.class);
+        // 设置了Map过程和Reduce过程的输出类型：key的类型为Text，value的类型为IntWritable
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+        // 任务的输出和输入路径则由命令行参数指定，并由FileInputFormat和FileOutputFormat分别设定。
+        // 为map-reduce job设置传入的第一个参数为MapReduce输入的HDFS文件路径
+        // FileInputFormat类的很重要的作用就是将文件进行切分split，并将split进一步拆分成key/value对
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
+        // 为map-reduce job设置传入的第二个参数为MapReduce结果输出的HDFS文件路径
+        // FileOutputFormat类的作用是将处理结果写入输出文件。
         FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
+        // 完成相应任务的参数设定后，调用 job.waitForCompletion() 方法执行任务
         System.exit(job.waitForCompletion(true)?0:1);
     } 
 }
