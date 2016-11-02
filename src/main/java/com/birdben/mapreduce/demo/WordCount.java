@@ -1,5 +1,8 @@
 package com.birdben.mapreduce.demo;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -10,6 +13,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 public class WordCount {
+
+    private static Log logger = LogFactory.getLog(WordCount.class);
+
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
@@ -17,6 +23,9 @@ public class WordCount {
             System.err.println("Usage: wordcount <in> <out>");
             System.exit(2);
         }
+
+        System.out.println("birdben out WordCount start");
+        logger.info("birdben logger WordCount start");
 
         Job job = new Job(conf, "wordcount");
         job.setJarByClass(WordCount.class);
