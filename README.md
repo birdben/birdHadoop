@@ -11,7 +11,7 @@ $ cd ${workspace}/
 $ mvn clean package
 
 # 执行对应入口类的Shell脚本
-$ sh runWordCount.sh
+$ sh scripts/mapreduce/runWordCount.sh
 ```
 
 ##### 第一次运行MapReduce程序需要先创建好HDFS目录
