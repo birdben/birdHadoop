@@ -15,6 +15,7 @@
     </properties>
 
     <dependencies>
+        <!-- MapReduce依赖包开始 -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
@@ -25,6 +26,17 @@
             <artifactId>hadoop-mapreduce-client-core</artifactId>
             <version>2.4.0</version>
         </dependency>
+        <!-- MapReduce依赖包结束 -->
+
+        <!-- Storm依赖包开始 -->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>0.10.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Storm依赖包结束 -->
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -49,7 +61,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.birdben.mapreduce.demo.WordCount</mainClass>
+                            <mainClass>com.birdben.storm.demo.WordCountMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
