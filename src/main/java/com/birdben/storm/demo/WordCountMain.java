@@ -1,13 +1,14 @@
 package com.birdben.storm.demo;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.AuthorizationException;
 import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.utils.Utils;
+import com.birdben.storm.demo.bolt.WordCounterBolt;
+import com.birdben.storm.demo.bolt.WordSpliterBolt;
+import com.birdben.storm.demo.spout.WordReaderSpout;
 
 public class WordCountMain {
     public static void main(String[] args) throws InvalidTopologyException, AuthorizationException, AlreadyAliveException {
@@ -19,9 +20,9 @@ public class WordCountMain {
 
         // 定义一个Topology
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("word-reader", new WordReader());
-        builder.setBolt("word-spilter", new WordSpliter()).shuffleGrouping("word-reader");
-        builder.setBolt("word-counter", new WordCounter()).shuffleGrouping("word-spilter");
+        builder.setSpout("word-reader", new WordReaderSpout());
+        builder.setBolt("word-spilter", new WordSpliterBolt()).shuffleGrouping("word-reader");
+        builder.setBolt("word-counter", new WordCounterBolt()).shuffleGrouping("word-spilter");
         String inputPath = args[0];
         String outputPath = args[1];
 

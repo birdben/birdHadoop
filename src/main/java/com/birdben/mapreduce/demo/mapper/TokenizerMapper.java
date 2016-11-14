@@ -1,4 +1,4 @@
-package com.birdben.mapreduce.demo;
+package com.birdben.mapreduce.demo.mapper;
 
 import java.io.IOException;
 import java.util.StringTokenizer;

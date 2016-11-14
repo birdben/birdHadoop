@@ -1,5 +1,7 @@
 package com.birdben.mapreduce.demo;
 
+import com.birdben.mapreduce.demo.mapper.TokenizerMapper;
+import com.birdben.mapreduce.demo.reducer.IntSumReducer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,9 +14,9 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-public class WordCount {
+public class WordCountMain {
 
-    private static Log logger = LogFactory.getLog(WordCount.class);
+    private static Log logger = LogFactory.getLog(WordCountMain.class);
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
@@ -24,12 +26,12 @@ public class WordCount {
             System.exit(2);
         }
 
-        System.out.println("birdben out WordCount start");
-        logger.info("birdben logger WordCount start");
+        System.out.println("birdben out WordCountMain start");
+        logger.info("birdben logger WordCountMain start");
         
 	    // 设置一个用户定义的job名称
         Job job = new Job(conf, "wordcount");
-        job.setJarByClass(WordCount.class);
+        job.setJarByClass(WordCountMain.class);
         // 为job设置使用的Mapper类（拆分）
         job.setMapperClass(TokenizerMapper.class);
         // 为job设置使用的Combiner类（中间结果合并）

@@ -61,7 +61,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.birdben.mapreduce.demo.WordCount</mainClass>
+                            <mainClass>com.birdben.mapreduce.demo.WordCountMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,4 +1,4 @@
-package com.birdben.storm.demo;
+package com.birdben.storm.demo.spout;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -20,9 +19,9 @@ import backtype.storm.tuple.Values;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class WordReader extends BaseRichSpout {
+public class WordReaderSpout extends BaseRichSpout {
 
-    Log logger = LogFactory.getLog(WordReader.class);
+    Log logger = LogFactory.getLog(WordReaderSpout.class);
 
     private static final long serialVersionUID = 2197521792014017918L;
     private String inputPath;
@@ -38,7 +37,7 @@ public class WordReader extends BaseRichSpout {
     @Override
     public void nextTuple() {
         // 这里不输出到控制台，因为没有新文件内容被读取，这句System.out会不断循环输出
-        //System.out.println("WordReader nextTuple out start");
+        //System.out.println("WordReaderSpout nextTuple out start");
         //System.out.println("out inputPath:" + inputPath);
         Collection<File> files = FileUtils.listFiles(new File(inputPath),
                 FileFilterUtils.notFileFilter(FileFilterUtils.suffixFileFilter(".bak")), null);
@@ -55,7 +54,7 @@ public class WordReader extends BaseRichSpout {
                 e.printStackTrace();
             }
         }
-        //System.out.println("WordReader nextTuple out end");
+        //System.out.println("WordReaderSpout nextTuple out end");
     }
 
     @Override

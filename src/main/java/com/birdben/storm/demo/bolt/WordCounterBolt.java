@@ -1,4 +1,4 @@
-package com.birdben.storm.demo;
+package com.birdben.storm.demo.bolt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
-public class WordCounter extends BaseBasicBolt {
+public class WordCounterBolt extends BaseBasicBolt {
     private static final long serialVersionUID = 5683648523524179434L;
     private FileOutputStream out = null;
     private HashMap<String, Integer> counters = new HashMap<String, Integer>();
@@ -22,7 +22,7 @@ public class WordCounter extends BaseBasicBolt {
     @Override
     @SuppressWarnings("rawtypes")
     public void prepare(Map stormConf, TopologyContext context) {
-        System.out.println("WordCounter prepare out start");
+        System.out.println("WordCounterBolt prepare out start");
         String outputPath = (String) stormConf.get("OUTPUT_PATH");
         try {
             out = new FileOutputStream(new File(outputPath + File.separator + "output_WordCount"));
@@ -33,7 +33,7 @@ public class WordCounter extends BaseBasicBolt {
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        System.out.println("WordCounter execute out start");
+        System.out.println("WordCounterBolt execute out start");
         String str = input.getString(0);
         //System.out.println("WordCounter execute:" + str);
         if (!counters.containsKey(str)) {
@@ -42,7 +42,7 @@ public class WordCounter extends BaseBasicBolt {
             Integer c = counters.get(str) + 1;
             counters.put(str, c);
         }
-        System.out.println("WordCounter execute out end");
+        System.out.println("WordCounterBolt execute out end");
     }
 
     @Override
@@ -56,10 +56,10 @@ public class WordCounter extends BaseBasicBolt {
      **/
     @Override
     public void cleanup() {
-        System.out.println("WordCounter clean out start");
+        System.out.println("WordCounterBolt cleanup out start");
         try {
             for (Entry<String, Integer> entry : counters.entrySet()) {
-                System.out.println("WordCounter result : " + entry.getKey() + " " + entry.getValue());
+                System.out.println("WordCounterBolt result : " + entry.getKey() + " " + entry.getValue());
                 out.write((entry.getKey() + " " + entry.getValue() + "\n").getBytes());
             }
         } catch (IOException e) {
@@ -74,6 +74,6 @@ public class WordCounter extends BaseBasicBolt {
                 }
             }
         }
-        System.out.println("WordCounter clean out end");
+        System.out.println("WordCounterBolt cleanup out end");
     }
 }

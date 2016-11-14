@@ -1,4 +1,4 @@
-package com.birdben.mapreduce.demo;
+package com.birdben.mapreduce.demo.reducer;
 
 import java.io.IOException;
 import org.apache.commons.logging.Log;

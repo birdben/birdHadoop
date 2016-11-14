@@ -1,4 +1,4 @@
-package com.birdben.storm.demo;
+package com.birdben.storm.demo.bolt;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -11,13 +11,13 @@ import backtype.storm.tuple.Values;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class WordSpliter extends BaseBasicBolt {
+public class WordSpliterBolt extends BaseBasicBolt {
 
     private static final long serialVersionUID = -5653803832498574866L;
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        System.out.println("WordSpliter execute out start");
+        System.out.println("WordSpliterBolt execute out start");
         String line = input.getString(0);
         String[] words = line.split(" ");
         for (String word : words) {
@@ -27,7 +27,7 @@ public class WordSpliter extends BaseBasicBolt {
                 collector.emit(new Values(word));
             }
         }
-        System.out.println("WordSpliter execute out end");
+        System.out.println("WordSpliterBolt execute out end");
     }
 
     @Override
