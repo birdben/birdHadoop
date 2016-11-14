@@ -2,6 +2,7 @@
 local_path=~/Downloads/birdHadoop
 local_inputfile_path=$local_path/inputfile/WordCount
 local_outputfile_path=$local_path/outputfile/WordCount
+main_class=com.birdben.storm.demo.WordCountMain
 if [ -f $local_inputfile_path/input_WordCount.bak ]; then
 	# 如果本地bak文件存在，就重命名去掉bak
 	echo "正在重命名$local_inputfile_path/input_WordCount.bak文件"
@@ -18,5 +19,5 @@ else
 fi
 # 需要在Maven的pom.xml文件中指定jar的入口类
 echo "开始执行birdHadoop.jar..."
-storm jar $local_path/target/birdHadoop.jar $local_inputfile_path $local_outputfile_path
+storm jar $local_path/target/birdHadoop.jar $main_class $local_inputfile_path $local_outputfile_path
 echo "结束执行birdHadoop.jar..."
