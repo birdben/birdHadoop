@@ -11,10 +11,11 @@ import com.birdben.storm.demo.bolt.WordSpliterBolt;
 import com.birdben.storm.demo.spout.WordReaderSpout;
 
 public class WordCountMain {
+
     public static void main(String[] args) throws InvalidTopologyException, AuthorizationException, AlreadyAliveException {
         if (args.length != 2) {
             System.err.println("Usage: inputPath outputPath");
-            System.err.println("such as : java -jar WordCount.jar /home/yunyu/Downloads/storm_inputfiles/ /home/yunyu/Downloads/storm_outputfiles/");
+            System.err.println("such as : java -jar birdHadoop.jar /home/yunyu/Downloads/storm_inputfiles/ /home/yunyu/Downloads/storm_outputfiles/");
             System.exit(2);
         }
 

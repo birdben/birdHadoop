@@ -13,8 +13,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class WordSpliterBolt extends BaseBasicBolt {
 
-    private static final long serialVersionUID = -5653803832498574866L;
-
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
         System.out.println("WordSpliterBolt execute out start");

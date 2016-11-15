@@ -1,12 +1,4 @@
-package com.birdben.storm.demo.bolt;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+package com.birdben.storm.adlog.bolt;
 
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.BasicOutputCollector;
@@ -14,18 +6,26 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
-public class WordCounterBolt extends BaseBasicBolt {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class AdLogCounterBolt extends BaseBasicBolt {
 
     private FileOutputStream out = null;
-    private HashMap<String, Integer> counters = new HashMap<String, Integer>();
+    private List<String> logs = new ArrayList();
 
     @Override
     @SuppressWarnings("rawtypes")
     public void prepare(Map stormConf, TopologyContext context) {
-        System.out.println("WordCounterBolt prepare out start");
+        System.out.println("AdLogCounterBolt prepare out start");
         String outputPath = (String) stormConf.get("OUTPUT_PATH");
         try {
-            out = new FileOutputStream(new File(outputPath + File.separator + "output_WordCount"));
+            out = new FileOutputStream(new File(outputPath + File.separator + "output_AdLog"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -33,16 +33,11 @@ public class WordCounterBolt extends BaseBasicBolt {
 
     @Override
     public void execute(Tuple input, BasicOutputCollector collector) {
-        System.out.println("WordCounterBolt execute out start");
-        String str = input.getString(0);
-        //System.out.println("WordCounterBolt execute:" + str);
-        if (!counters.containsKey(str)) {
-            counters.put(str, 1);
-        } else {
-            Integer c = counters.get(str) + 1;
-            counters.put(str, c);
-        }
-        System.out.println("WordCounterBolt execute out end");
+        System.out.println("AdLogCounterBolt execute out start");
+        String log = input.getString(0);
+        //System.out.println("AdLogCounterBolt execute:" + log);
+        logs.add(log);
+        System.out.println("AdLogCounterBolt execute out end");
     }
 
     @Override
@@ -56,11 +51,11 @@ public class WordCounterBolt extends BaseBasicBolt {
      **/
     @Override
     public void cleanup() {
-        System.out.println("WordCounterBolt cleanup out start");
+        System.out.println("AdLogCounterBolt cleanup out start");
         try {
-            for (Entry<String, Integer> entry : counters.entrySet()) {
-                System.out.println("WordCounterBolt result : " + entry.getKey() + " " + entry.getValue());
-                out.write((entry.getKey() + " " + entry.getValue() + "\n").getBytes());
+            for (String log : logs) {
+                System.out.println("AdLogCounterBolt result : " + log);
+                out.write((log + "\n").getBytes());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,6 +69,6 @@ public class WordCounterBolt extends BaseBasicBolt {
                 }
             }
         }
-        System.out.println("WordCounterBolt cleanup out end");
+        System.out.println("AdLogCounterBolt cleanup out end");
     }
 }

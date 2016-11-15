@@ -1,4 +1,15 @@
-package com.birdben.storm.demo.spout;
+package com.birdben.storm.adlog.spout;
+
+import backtype.storm.spout.SpoutOutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.topology.base.BaseRichSpout;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,21 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
+public class AdLogReaderSpout extends BaseRichSpout {
 
-import backtype.storm.spout.SpoutOutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.topology.base.BaseRichSpout;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-public class WordReaderSpout extends BaseRichSpout {
-
-    Log logger = LogFactory.getLog(WordReaderSpout.class);
+    Log logger = LogFactory.getLog(AdLogReaderSpout.class);
 
     private String inputPath;
     private SpoutOutputCollector collector;
@@ -36,7 +35,7 @@ public class WordReaderSpout extends BaseRichSpout {
     @Override
     public void nextTuple() {
         // 这里不输出到控制台，因为没有新文件内容被读取，这句System.out会不断循环输出
-        //System.out.println("WordReaderSpout nextTuple out start");
+        //System.out.println("AdLogReaderSpout nextTuple out start");
         //System.out.println("out inputPath:" + inputPath);
         Collection<File> files = FileUtils.listFiles(new File(inputPath),
                 FileFilterUtils.notFileFilter(FileFilterUtils.suffixFileFilter(".bak")), null);
@@ -53,7 +52,7 @@ public class WordReaderSpout extends BaseRichSpout {
                 e.printStackTrace();
             }
         }
-        //System.out.println("WordReaderSpout nextTuple out end");
+        //System.out.println("AdLogReaderSpout nextTuple out end");
     }
 
     @Override
